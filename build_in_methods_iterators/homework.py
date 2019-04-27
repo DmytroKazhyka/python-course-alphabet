@@ -121,7 +121,6 @@ def task_10_generator_of_simple_numbers() -> Generator[int, None, None]:
         if all(n % x != 0 for x in range(2, n)):
             yield n
 
-task_10_generator_of_simple_numbers()
 
 def task_11_create_list_of_random_characters() -> List[str]:
     """
