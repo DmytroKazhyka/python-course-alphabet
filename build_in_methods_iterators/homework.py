@@ -51,14 +51,14 @@ def task_4_min_value_integers(data: List[int]) -> int:
     """
     Find and return minimum value from list
     """
-    return min(data)
+    return min(data, default = None)
 
 
 def task_5_min_value_strings(data: List[Union[str, int]]) -> str:
     """
     Find the longest string
     """
-    return max([i for i in filter(lambda i: isinstance(i, str), data)], key = len)
+    return max([i for i in filter(lambda i: str(i), (data, None))], key = len)
 
 
 def task_6_min_value_list_of_dicts(data: DT, key: str) -> ST:
@@ -68,7 +68,7 @@ def task_6_min_value_list_of_dicts(data: DT, key: str) -> ST:
 
     """
     compare_list = [d[key] for d in data]
-    min_value = min(compare_list)
+    min_value = min(compare_list, default = None)
     return [d for d in data if min_value in d.values()]
 
 
@@ -117,11 +117,11 @@ def task_10_generator_of_simple_numbers() -> Generator[int, None, None]:
         next(a)
         >>> 3
     """
-    n = 0
-    while n <= 200:
-        yield print(n)
-        n+=1
+    for n in range(2, 201):
+        if all(n % x != 0 for x in range(2, n)):
+            yield n
 
+task_10_generator_of_simple_numbers()
 
 def task_11_create_list_of_random_characters() -> List[str]:
     """
