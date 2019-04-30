@@ -17,10 +17,12 @@ if len(new_data) > 1:
 else:
     print("Empty")
 
+
 if len(new_data) == True:
     print("Not empty")
 else:
     print("Empty")
+
 
 if new_data:
     print("Not empty")

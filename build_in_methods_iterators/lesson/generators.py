@@ -1,11 +1,13 @@
 import sys
 
+
 def interger_values():
     i = 0
     while True:
         yield i
         i += 1
         yield str(i)
+
 
 # our_gen = interger_values()
 #
@@ -53,4 +55,6 @@ members = [
 members_gen = (members)
 print(next(members_gen))
 
+
 print(range(100))
+
