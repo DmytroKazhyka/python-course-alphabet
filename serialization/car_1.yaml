@@ -1,6 +1,7 @@
 !!python/object:objects_and_classes.homework.homework.Car
 mileage: 5000
-number: !!python/object:uuid.UUID {int: 227278830824465437422428177871674496426}
+number: !!python/object:uuid.UUID {int: 195936044465614536089309271145141567777}
 price: 45000
-producer: BMW
-type: Van
+producer: Buick
+type: Sedan
+
