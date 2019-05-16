@@ -1,0 +1,6 @@
+!!python/object:objects_and_classes.homework.homework.Car
+mileage: 5000
+number: !!python/object:uuid.UUID {int: 217432979098979195662519433021828261747}
+price: 45000
+producer: Bugatti
+type: Coupe

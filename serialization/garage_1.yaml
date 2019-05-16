@@ -1,0 +1,5 @@
+!!python/object:objects_and_classes.homework.homework.Garage
+cars: []
+owner: null
+places: 5
+town: Amsterdam
