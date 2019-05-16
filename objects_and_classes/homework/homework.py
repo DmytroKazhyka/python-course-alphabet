@@ -47,14 +47,131 @@
     Колекціонерів можна порівнювати за ціною всіх їх автомобілів.
 """
 
+import constants
+import random
+import uuid
+
 
 class Cesar:
-    pass
+
+    def __init__(self, name):
+        self.name = name
+        self.garages = []
+        self.register_id = uuid.uuid4()
+
+    def add_garage(self, garage):
+        self.garages.append(garage)
+        garage.owner = self.name
+
+    def choose_garage(self):
+        list_of_places = []
+        for garage in self.garages:
+            list_of_places.append(garage.free_places())
+        for garage in self.garages:
+            if garage.free_places() == max(list_of_places):
+                return garage
+
+    def add_car(self, car, garage=None):
+        if garage:
+            if garage in self.garages:
+                garage.add(car)
+        else:
+            chosen_garage = self.choose_garage()
+            chosen_garage.add(car)
+
+    def garages_count(self):
+        return len(self.garages)
+
+    def cars_count(self):
+        number_of_cars = 0
+        for garage in self.garages:
+            number_of_cars += len(garage.cars)
+        return number_of_cars
+
+    def hit_hat(self):
+        sum_price = 0
+        for garage in self.garages:
+            for car in garage.cars:
+                sum_price += car.price
+        return sum_price
+
+    def __ne__(self, other):
+        return self.hit_hat() != other.hit_hat()
+
+    def __eq__(self, other):
+        return self.hit_hat() == other.hit_hat()
+
+    def __le__(self, other):
+        return self.hit_hat() <= other.hit_hat()
+
+    def __ge__(self, other):
+        return self.hit_hat() >= other.hit_hat()
+
+    def __lt__(self, other):
+        return self.hit_hat() < other.hit_hat()
+
+    def __gt__(self, other):
+        return self.hit_hat() > other.hit_hat()
 
 
 class Car:
-    pass
+
+    def __init__(self, price, mileage):
+        self.price = price
+        self.mileage = mileage
+        self.type = random.choice(constants.CARS_TYPES)
+        self.producer = random.choice(constants.CARS_PRODUCER)
+        self.number = uuid.uuid4()
+
+    def __repr__(self):
+        return 'price: {}, mileage: {}, type: {}, producer: {}, number: {}'.format(self.price, self.mileage, self.type,
+                                                                                   self.producer, self.number)
+
+    def __ne__(self, other):
+        return self.price != other.price
+
+    def __eq__(self, other):
+        return self.price == other.price
+
+    def __le__(self, other):
+        return self.price <= other.price
+
+    def __ge__(self, other):
+        return self.price >= other.price
+
+    def __lt__(self, other):
+        return self.price < other.price
+
+    def __gt__(self, other):
+        return self.price > other.price
+
+    def change_number(self):
+        self.number = uuid.uuid4()
 
 
 class Garage:
-    pass
+
+    def __init__(self, places, owner=None):
+        self.places = places
+        self.owner = owner
+        self.cars = []
+        self.town = random.choice(constants.TOWNS)
+
+    def add(self, car):
+        if len(self.cars) < self.places:
+            self.cars.append(car)
+        else:
+            print('No free places left')
+
+    def remove_car(self, car):
+        if car in self.cars:
+            self.cars.remove(car)
+
+    def hit_hat(self):
+        sum_of_car_prices = 0
+        for car in self.cars:
+            sum_of_car_prices += car.price
+        return sum_of_car_prices
+
+    def free_places(self):
+        return self.places - len(self.cars)
