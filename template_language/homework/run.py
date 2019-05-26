@@ -16,7 +16,11 @@ def home_page():
 
 @app.route('/movies')
 def movies_page():
-    return render_template('movies.html', title='Movies list', movies=MOVIES)
+    sorted_movies = []
+    for movie in MOVIES:
+        if int(movie['year']) >= 2010:
+            sorted_movies.append(movie)
+    return render_template('movies.html', title='Movies list', movies=sorted_movies)
 
 
 @app.route('/<title>')
