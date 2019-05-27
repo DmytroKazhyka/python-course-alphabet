@@ -24,7 +24,6 @@ def generators_examples(step=0):
         yield i + step
         i += 1
 
-
 numbers = range(100)
 
 g = generators_examples()
@@ -56,4 +55,6 @@ members = [
 members_gen = (members)
 print(next(members_gen))
 
+
 print(range(100))
+

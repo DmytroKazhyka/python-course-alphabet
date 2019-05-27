@@ -17,6 +17,7 @@ members = [
     {'age': 55, 'name': 'Frank'},
     {'age': 83, 'name': 'Homer'}
 ]
+
 # Suppose we have to get all members that are older than 49 years.
 # In current example we could do it in at least two ways
 # Using list comprehension
