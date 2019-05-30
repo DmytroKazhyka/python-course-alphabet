@@ -32,83 +32,42 @@ garage_1 = Garage(5)
 car_1 = Car(45000, 5000)
 
 
-# Method to convert custom object of class Cesar to JSON convertible format
-def cesar_to_json(obj: Cesar):
-    data = {'name': obj.name}
-    return data
-
-
-# Method to convert custom object of class Garage to JSON convertible format
-def garage_to_json(obj: Garage):
-    data = {'places': obj.places, 'owner': None}
-    return data
-
-
-# Method to convert custom object of class Car to JSON convertible format
-def car_to_json(obj: Car):
-    data = {'price': obj.price, 'mileage': obj.mileage}
-    return data
-
-
-# Method to convert JSON string into object of class Cesar
-def cesar_from_json(data):
-    name = data['name']
-    cr = Cesar(name=name)
-    return cr
-
-
-# Method to convert JSON string into object of class Garage
-def garage_from_json(data):
-    places = data['places']
-    owner = data['owner']
-    gr = Garage(places=places, owner=owner)
-    return gr
-
-
-# Method to convert JSON string into object of class Car
-def car_from_json(data):
-    price = data['price']
-    mileage = data['mileage']
-    car = Car(price=price, mileage=mileage)
-    return car
-
-
 # Convert instances of Cesar, Garage and Car into JSON strings
-encoded_cesar = json.dumps(cesar_1, default=cesar_to_json)
+encoded_cesar = json.dumps(cesar_1.convert_to_dict())
 
-encoded_garage = json.dumps(garage_1, default=garage_to_json)
+encoded_garage = json.dumps(garage_1.convert_to_dict())
 
-encoded_car = json.dumps(car_1, default=car_to_json)
+encoded_car = json.dumps(car_1.convert_to_dict())
 
 
 # Create instances of Cesar, Garage and Car from json strings
-decoded_cesar = json.loads(encoded_cesar, object_hook=cesar_from_json)
+decoded_cesar = json.loads(encoded_cesar, object_hook=Cesar.convert_from_dict)
 
-decoded_garage = json.loads(encoded_garage, object_hook=garage_from_json)
+decoded_garage = json.loads(encoded_garage, object_hook=Garage.convert_from_dict)
 
-decoded_car = json.loads(encoded_car, object_hook=car_from_json)
+decoded_car = json.loads(encoded_car, object_hook=Car.convert_from_dict)
 
 
 # Save instances of Cesar, Garage and Car into JSON files
 with open('cesar_1.json', 'w') as file:
-    json.dump(cesar_1, file, default=cesar_to_json)
+    json.dump(cesar_1.convert_to_dict(), file)
 
 with open('garage_1.json', 'w') as file:
-    json.dump(garage_1, file, default=garage_to_json)
+    json.dump(garage_1.convert_to_dict(), file)
 
 with open('car_1.json', 'w') as file:
-    json.dump(car_1, file, default=car_to_json)
+    json.dump(car_1.convert_to_dict(), file)
 
 
 # Create instances of Cesar, Garage and Car from JSON files
 with open('cesar_1.json', 'r') as file:
-    decoded_cesar = json.load(file, object_hook=cesar_from_json)
+    decoded_cesar = json.load(file, object_hook=Cesar.convert_from_dict)
 
 with open('garage_1.json', 'r') as file:
-    decoded_garage = json.load(file, object_hook=garage_from_json)
+    decoded_garage = json.load(file, object_hook=Garage.convert_from_dict)
 
 with open('car_1.json', 'r') as file:
-    decoded_car = json.load(file, object_hook=car_from_json)
+    decoded_car = json.load(file, object_hook=Car.convert_from_dict)
 
 
 # -------------------------------YAML------------------------------

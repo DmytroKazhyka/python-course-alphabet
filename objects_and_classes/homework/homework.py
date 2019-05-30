@@ -47,7 +47,7 @@
     Колекціонерів можна порівнювати за ціною всіх їх автомобілів.
 """
 
-import constants
+from objects_and_classes.homework import constants
 import random
 import uuid
 
@@ -58,6 +58,16 @@ class Cesar:
         self.name = name
         self.garages = []
         self.register_id = uuid.uuid4()
+
+    def convert_to_dict(self):
+        data = {'name': self.name}
+        return data
+
+    @classmethod
+    def convert_from_dict(cls, data):
+        name = data['name']
+        cr = Cesar(name=name)
+        return cr
 
     def add_garage(self, garage):
         self.garages.append(garage)
@@ -123,6 +133,17 @@ class Car:
         self.producer = random.choice(constants.CARS_PRODUCER)
         self.number = uuid.uuid4()
 
+    def convert_to_dict(self):
+        data = {'price': self.price, 'mileage': self.mileage}
+        return data
+
+    @classmethod
+    def convert_from_dict(cls, data):
+        price = data['price']
+        mileage = data['mileage']
+        car_inst = Car(price=price, mileage=mileage)
+        return car_inst
+
     def __repr__(self):
         return 'price: {}, mileage: {}, type: {}, producer: {}, number: {}'.format(self.price, self.mileage, self.type,
                                                                                    self.producer, self.number)
@@ -157,6 +178,17 @@ class Garage:
         self.cars = []
         self.town = random.choice(constants.TOWNS)
 
+    def convert_to_dict(self):
+        data = {'places': self.places, 'owner': self.owner}
+        return data
+
+    @classmethod
+    def convert_from_dict(cls, data):
+        places = data['places']
+        owner = data['owner']
+        gar_inst = Garage(places=places, owner=owner)
+        return gar_inst
+
     def add(self, car):
         if len(self.cars) < self.places:
             self.cars.append(car)
@@ -175,3 +207,14 @@ class Garage:
 
     def free_places(self):
         return self.places - len(self.cars)
+
+
+# cesar_1 = Cesar('Axelrod')
+# garage_1 = Garage(5)
+#
+# ser_to_json_garage_1 = json.dumps(garage_1.convert_to_dict())
+# print(type(ser_to_json_garage_1), ser_to_json_garage_1)
+#
+#
+# deser_from_json_garage_1 = json.loads(ser_to_json_garage_1, object_hook=Garage.convert_from_dict)
+# print(type(deser_from_json_garage_1), deser_from_json_garage_1)
