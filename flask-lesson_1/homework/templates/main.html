@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href={{ url_for('static', filename='style_hw.css') }} />
+    <title>{% block title %}Fruits & Vegetables{% endblock %}</title>
+</head>
+<body>
+    <div id="content">
+        {% block content %}
+        <h3>Our links</h3>
+        <ul>
+            <li><a href={{url_for('fruits')}}>Fruits</a></li>
+            <li><a href={{url_for('vegetables')}}>Vegetables</a></li>
+        </ul>
+        {% endblock %}
+    </div>
+</body>
+</html>

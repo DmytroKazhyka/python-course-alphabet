@@ -1,0 +1,10 @@
+{% extends 'main.html' %}
+{% block title %}Vegetables{% endblock %}
+{% block content %}
+    <h3>Our Vegetables</h3>
+    <ul>
+        {% for vegetable in vegetables_list %}
+            <li>{{vegetable}}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
